@@ -38,11 +38,14 @@ class SpikeAnalyzer:
 
     def _basic_stats(self):
         """calculate basic statistic information"""
+        print("_basic_stats")
         self.results['total_spikes'] = len(self.df)
         self.results['num_neurons'] = self.df['node_ids'].nunique()
         self.results['average_spikes_per_neuron'] = self.results['total_spikes'] / self.results['num_neurons']
 
     def _calculate_firing_rates(self):
+        print("_calculate_firing_rates")
+
         """calculate neuron's firing frequency"""
         spike_counts = self.df['node_ids'].value_counts()
         total_time = (self.df['timestamps'].max()-self.df['timestamps'].min()) / 1000   # ms->s
@@ -52,6 +55,8 @@ class SpikeAnalyzer:
 
     def _plot_spike_raster(self, layer_height_mode='equal'):
         """Raster plot or Scatter plot, and tag layer information."""
+        print("_plot_spike_raster")
+
         try:
             plt.figure(figsize=(12, 8))
 
@@ -60,6 +65,8 @@ class SpikeAnalyzer:
             max_id = self.df['node_ids'].max()
 
             custom_heights = {1: 0.8, 2: 1.1, 3: 1.1, 4: 1.0, 5: 1.1}
+
+            print("2.set Y-axis range")
 
             # 2.set Y-axis range
             if layer_height_mode == 'equal':
@@ -78,6 +85,8 @@ class SpikeAnalyzer:
                 raise ValueError("layer_height_mode must be 'equal' or 'custom'")
 
             # 3.set background color
+            print("3.set background color")
+
             for i, layer in enumerate(layers):
                 colors = '#444444' if i % 2 == 0 else 'white'
 
@@ -87,11 +96,14 @@ class SpikeAnalyzer:
                             facecolor=colors, alpha=0.3, zorder=0)
 
             # 4.Plot data points
+            print("4.Plot data points")
+
             for layer in layers:
                 layer_data = self.df[self.df['location'] == layer]
                 y = layer_data['node_ids'] + y_offsets[layer]
                 colors = layer_data['ei'].map(self.color_map)
                 plt.scatter(x=layer_data['timestamps'], y=y, c=colors, s=3, alpha=0.3, edgecolors='none', zorder=3)
+            print("sssssssssssssssssssssssssssss")
 
             plt.ylim(0, total_height)
             plt.title(f'Spike Raster Plot -- {self.dataset_name}', fontsize=14)
@@ -99,6 +111,8 @@ class SpikeAnalyzer:
             plt.ylabel('Node ID(Group by Layer)', fontsize=12)
 
             # 5.calculate and set the Y-axis position
+            print("5.calculate and set the Y-axis position")
+
             y_ticks_pos = []
             for layer in layers:
                 if layer_height_mode == 'equal':
@@ -122,6 +136,8 @@ class SpikeAnalyzer:
 
     def _plot_timestamp_distribution(self):
         """绘制时间戳分布图"""
+        print("_plot_timestamp_distribution")
+
         plt.figure(figsize=(12, 6))
         sns.histplot(self.df['timestamps'], bins=50, kde=True)
         plt.title(f'Spike Timestamps Distribution - {self.dataset_name}')
@@ -134,6 +150,8 @@ class SpikeAnalyzer:
 
     def _plot_firing_rates(self):
         """绘制放电频率散点图：每个点代表一个神经元的平均放电率。"""
+        print("_plot_firing_rates")
+
         plt.figure(figsize=(12, 6))
         plt.scatter(self.average_firing_rates.index, self.average_firing_rates.values, alpha=0.5)
         plt.title(f'Average Firing Rates per Neuron - {self.dataset_name}')
@@ -146,6 +164,8 @@ class SpikeAnalyzer:
 
     def _plot_firing_rate_distribution(self):
         """绘制放电频率分布箱线图:展示所有神经元放电率的分布情况。"""
+        print("_plot_firing_rate_distribution")
+
         plt.figure(figsize=(8, 6))
         sns.boxplot(y=self.average_firing_rates)
         plt.title(f'Firing Rate Distribution - {self.dataset_name}')
@@ -158,6 +178,8 @@ class SpikeAnalyzer:
 
     def print_summary(self):
         """打印分析结果摘要"""
+        print("print_summary")
+
         print(f"\n===== Analysis Summary for {self.dataset_name} =====")
         print(f"Total spikes: {self.results['total_spikes']}")
         print(f"Number of neurons: {self.results['num_neurons']}")
@@ -182,7 +204,7 @@ def analyze_all_datasets(file_paths):
 if __name__ == "__main__":
     try:
         # 设置数据文件路径
-        data_dir = r'C:\Users\ChenYi\Desktop\V1_model\V1point Project\4.Data files\point spikes files'
+        data_dir = r'C:\Users\ChenYi\Desktop\V1_model\V1point Project\4.Data_files\point spikes files'
         file_names = [
             'spike_data_ei_EFC.csv',
             'spike_data_ei_MC.csv',

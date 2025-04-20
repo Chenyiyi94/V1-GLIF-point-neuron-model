@@ -1,8 +1,10 @@
+"""处理网络的输出文件。因为网络输出csv格式的spike文件，而原作者给定的raster plot code的输入是txt格式，所以做个转化。"""
+
 import pandas as pd
 import os
 
 # CSV文件
-csv_file = r'C:\Users\ChenYi\Desktop\V1_model\V1point Project\4.Data_files\our_result_point\spikes.csv'
+csv_file = r'C:\Users\ChenYi\Desktop\V1_model\V1point Project\4.Data_files\our_result_point\SS_spikes.csv'
 
 # 生成对应的TXT文件路径
 txt_file = os.path.splitext(csv_file)[0] + '.txt'

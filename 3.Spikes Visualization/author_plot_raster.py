@@ -98,7 +98,7 @@ def plot_raster_query(ax,spikes,nodes_df,cmap, plot_order, twindow=[0,3], marker
 if __name__ == '__main__':
 
     # Spikes file to load and plot
-    spikes_file_name = r'C:\Users\ChenYi\Desktop\V1_model\V1point Project\4.Data_files\our_result_point\spikes.txt'
+    spikes_file_name = r'C:\Users\ChenYi\Desktop\V1_model\V1point Project\4.Data_files\our_result_point\VIS_spikes.txt'
     # spikes_file_name = 'biophysical/spikes_flash_trial0.txt'
     # spikes_file_name = 'biophysical/spikes_naturalMovie_trial0.txt'
     spikes = np.loadtxt(spikes_file_name, unpack=True)
