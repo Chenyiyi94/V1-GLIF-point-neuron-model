@@ -1,5 +1,6 @@
 """论文提供的代码，用于画raster plot"""
 import numpy as np
+import os
 import matplotlib.pyplot as plt
 import pandas as pd
 import matplotlib.pylab as pylab
@@ -98,7 +99,7 @@ def plot_raster_query(ax,spikes,nodes_df,cmap, plot_order, twindow=[0,3], marker
 if __name__ == '__main__':
 
     # Spikes file to load and plot
-    spikes_file_name = r'C:\Users\ChenYi\Desktop\V1_model\V1point Project\4.Data_files\our_result_point\VIS_spikes.txt'
+    spikes_file_name = r'C:\Users\ChenYi\Desktop\V1_model\V1point Project\4.Data_files\our_V1point_spikesResult_Figure\natural_movie\EFC_spikes.txt'
     # spikes_file_name = 'biophysical/spikes_flash_trial0.txt'
     # spikes_file_name = 'biophysical/spikes_naturalMovie_trial0.txt'
     spikes = np.loadtxt(spikes_file_name, unpack=True)
@@ -166,6 +167,35 @@ if __name__ == '__main__':
         plt.plot([2000, 2000], [-13000, -7000], color='k', lw=5)
         ax.set_ylim([-16000, 54000])
 
-    plt.show()
+    ########
+
+    # 添加分层注释（L1到L6）
+    layer_labels = ['L1', 'L2/3', 'L4', 'L5', 'L6']
+    layer_positions = [52000, 40000, 30000, 20000, 8000]  # 根据你的神经元ID范围调整这些值
+
+    for label, ypos in zip(layer_labels, layer_positions):
+        ax.text(3100, ypos, label,
+                fontsize=40,
+                ha='left',
+                va='center')
+
+    # 自动生成输出文件名
+    output_dir = r'C:\Users\ChenYi\Desktop\V1_model\V1point Project\4.Data_files\our_V1point_spikesResult_Figure\natural_movie'
+    os.makedirs(output_dir, exist_ok=True)
+
+    # 从输入文件名提取基础名
+    base_name = os.path.basename(spikes_file_name)
+    figure_name = os.path.splitext(base_name)[0] + '_Figure.png'
+
+    # 完整保存路径
+    save_path = os.path.join(output_dir, figure_name)
+
+    # 保存图像
+    plt.savefig(save_path, dpi=1000, bbox_inches='tight')
+    print(f"Figure saved to: {save_path}")
+
+    plt.show(block=False)
+    plt.pause(5)  # 显示5秒
+    plt.close()
 
 

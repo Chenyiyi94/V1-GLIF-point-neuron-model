@@ -2,6 +2,10 @@
 根据Allen实验室的《Systematic Integration of Structural and Functional Data into Multi-scale Models of Mouse Primary Visual Cortex》
 做一些复现和修改工作。
 
+## 研究目的
+基于大量实验数据，做一个数据驱动的初级视觉皮层的模型，通过给定不同的bkg输入和lgn输入，观察模型的spike输出，
+以此来研究大脑皮层回路的运行特点。更具体地，我们是通过计算不同neuron/region之间的连接强度，来定义网络的连接权重。
+
 ## step 1:计算不同区域的连接权重
 ### 怎么定义连接权重？
 一个nueron，如果它的soma落在source region，而它的一部分axon和bouton落在goal region里，则我们计算落在goal region里axon number和bouton number，
