@@ -4,6 +4,7 @@
 *.csv
 *.docx
 *.txt
+*.eswc
 
 *.jpg
 *.jpeg
@@ -24,3 +25,6 @@ point_env/
 .DS_Store
 
 Thumbs.db
+
+*.swc
+*.eswc

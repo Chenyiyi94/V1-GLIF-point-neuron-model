@@ -99,7 +99,7 @@ def plot_raster_query(ax,spikes,nodes_df,cmap, plot_order, twindow=[0,3], marker
 if __name__ == '__main__':
 
     # Spikes file to load and plot
-    spikes_file_name = r'C:\Users\ChenYi\Desktop\V1_model\V1point Project\4.Data_files\our_V1point_spikesResult_Figure\natural_movie\EFC_spikes.txt'
+    spikes_file_name = r'C:\Users\ChenYi\Desktop\V1_model\V1point Project\4.Data_files\FullField_Flash\spikes_VIS.txt'
     # spikes_file_name = 'biophysical/spikes_flash_trial0.txt'
     # spikes_file_name = 'biophysical/spikes_naturalMovie_trial0.txt'
     spikes = np.loadtxt(spikes_file_name, unpack=True)
@@ -180,7 +180,7 @@ if __name__ == '__main__':
                 va='center')
 
     # 自动生成输出文件名
-    output_dir = r'C:\Users\ChenYi\Desktop\V1_model\V1point Project\4.Data_files\our_V1point_spikesResult_Figure\natural_movie'
+    output_dir = r'C:\Users\ChenYi\Desktop\V1_model\V1point Project\4.Data_files\our_V1point_spikesResult_Figure\Full_Field_Flash'
     os.makedirs(output_dir, exist_ok=True)
 
     # 从输入文件名提取基础名
